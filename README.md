@@ -15,6 +15,7 @@ AI agents work across sessions, models, and runtimes. A log entry without contex
 opencancode/
 ├── rules/
 │   ├── devlog.md            # DEVLOG protocol: entry structure + execution metadata + relay reconciliation
+│   ├── iron-rules.md        # 28 engineering iron rules for AI coding agents (5 groups)
 │   ├── journal-handoff.md   # daily journal + <100-line session handoff
 │   └── registry.md          # environment registry: look up before asking, register on change
 ├── templates/
@@ -27,7 +28,8 @@ opencancode/
 │   └── registry-example.md  # fictional workspace with models & proxy tables filled in
 └── snippets/
     ├── AGENTS-log.md        # paste-ready rule block: development logging
-    └── AGENTS-registry.md   # paste-ready rule block: environment registry lookup
+    ├── AGENTS-registry.md   # paste-ready rule block: environment registry lookup
+    └── AGENTS-rules.md      # paste-ready rule block: Top 10 iron rules
 ```
 
 ## Adopt in 3 steps
@@ -42,10 +44,11 @@ opencancode/
 - **Relay reconciliation** — when a different model or runtime continues the work, the entry must reference what it continues ("based on #12"), and reconcile before writing if the baseline moved. Think optimistic locking for logs.
 - **Handoff under 100 lines** — end every session with a compact structured handoff: goal / done / undone / context snapshot / next first step.
 - **Registry: register once, look up everywhere** — which models you have (and how each agent calls them), which proxy ports serve what, live in `registry/` tables. Agents look them up before asking you, and register changes as they happen — no more re-stating your setup in every conversation.
+- **Iron rules** — 28 engineering disciplines in five groups (process & principles, environment isolation, Git & credentials, service ops, debugging methodology) that override agent defaults; a Top-10 paste-ready snippet gets you started.
 
 ## 中文简介
 
-面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，规则细节见 `rules/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；模型、代理端口等环境资产一次登记，agent 先查后问，跨对话免重复强调。
+面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表** + **工程铁律**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，规则细节见 `rules/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；模型、代理端口等环境资产一次登记，agent 先查后问，跨对话免重复强调；工程铁律（28 条五组）为 agent 提供可声明的行为约束层。
 
 ## Sources & attribution
 
