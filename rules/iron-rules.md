@@ -2,6 +2,8 @@
 
 > 面向任何 AI coding agent 的行为约束合集：把反复踩坑换来的工程纪律，编码为 agent 必须遵守的硬规则。优先级：本文件 > agent 自有默认行为。版本 v1.0。
 >
+> **协议家族中的位置**：[devlog](devlog.md) / [journal-handoff](journal-handoff.md) / [registry](registry.md) / [skills](skills.md) 管「记录与登记」，本文件管「行为约束」——互补，不互相替代。
+>
 > 标注「来源」的条目为吸收改写（汇总见 [SOURCES.md](../SOURCES.md)）；未标注的为原创沉淀。
 
 ## 一、流程与原则

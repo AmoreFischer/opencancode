@@ -1,6 +1,8 @@
 # DEVLOG 开发日志协议
 
 > 面向任何 AI coding agent 的开发日志约定。目标：跨会话 / 跨模型 / 跨运行时的工作记录，永远可追溯「谁、在什么环境、基于什么基线」写下的这条日志。版本 v1.0。
+>
+> **协议家族**：**devlog 记过程** · [journal / handoff](journal-handoff.md) 记日常与交接 · [registry](registry.md) 记环境资产 · [skills](skills.md) 管能力资产 · [iron-rules](iron-rules.md) 管行为约束。
 
 ## 1. 文件与条目结构
 
