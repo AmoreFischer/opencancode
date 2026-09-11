@@ -1,0 +1,7 @@
+{
+  "_说明": "技能清单 — 由各 SKILL.md frontmatter 重建，不手改；规则见 rules/skills.md",
+  "updated": "<YYYY-MM-DD>",
+  "skills": [
+    { "id": "<技能 id>", "version": "<x.y>", "description": "<一句话用途>" }
+  ]
+}
