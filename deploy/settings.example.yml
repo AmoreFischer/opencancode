@@ -1,0 +1,10 @@
+# Minimal SearXNG settings for the q CLI (place at deploy/searxng/settings.yml)
+# JSON output must be enabled; limiter off for local single-user use.
+use_default_settings: true
+server:
+  secret_key: "CHANGE_ME_TO_A_RANDOM_STRING"   # 必改：openssl rand -hex 32
+  limiter: false
+search:
+  formats:
+    - html
+    - json

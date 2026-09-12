@@ -10,5 +10,7 @@
 | `rules/iron-rules.md` #12-15、#18 部分原则 | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills)（Karpathy CLAUDE.md 规则集） | 编号化为铁律并合并改写；补强「暴露权衡」维度；去除个人化表述 |
 | `rules/iron-rules.md` #17-18 标记法与测试门禁 | [github/spec-kit](https://github.com/github/spec-kit) | Test-First 门禁与 `[NEEDS CLARIFICATION]` 标记法，适配 agent 工作模式 |
 | `rules/iron-rules.md` #19 环境隔离 | Python 官方 venv 指南 + claude-code best practices | 泛化为跨语言的环境隔离要求 |
+| `deploy/` + `tools/q/q.py` 的搜索后端 | [searxng/searxng](https://github.com/searxng/searxng)（AGPL-3.0） | 作为**独立后端服务引用**（未改其源码）；本仓仅提供部署样例（compose/settings）与调用协议 |
+| `rules/search-chain.md` 搜狗选择器与节流参数 | **Original**（批量实证沉淀：`div.vrwrap` 无验证码最优、≤4 批/75-120s 间隔、跨任务 ≥90s、双故障形态判别表） | — |
 
 其余文件（模板 / 示例 / 片段）为上述规则的派生内容。引用均遵循上游各自许可证；本仓库整体以 [MIT](LICENSE) 发布。

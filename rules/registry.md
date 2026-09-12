@@ -2,7 +2,7 @@
 
 > 面向任何 AI coding agent 的环境资产登记约定。目标：把「有哪些模型、各 agent 怎么调用、走哪个代理端口、依赖哪些外部 API、本地跑着什么服务、常用工具在哪」这类一次性配置，写进固定位置的清单，跨会话 / 跨 agent 复用——写一次，处处可查，不再每段对话重复强调。版本 v1.2。
 >
-> **协议家族**：[devlog](devlog.md) 记过程 · [journal / handoff](journal-handoff.md) 记日常与交接 · **registry 记环境资产** · [skills](skills.md) 管能力资产 · [iron-rules](iron-rules.md) 管行为约束。
+> **协议家族**：[devlog](devlog.md) 记过程 · [journal / handoff](journal-handoff.md) 记日常与交接 · **registry 记环境资产** · [skills](skills.md) 管能力资产 · [iron-rules](iron-rules.md) 管行为约束 · [search-chain](search-chain.md) 管联网获取。
 >
 > 与本仓其他协议并列：[devlog](devlog.md) 记过程，[journal / handoff](journal-handoff.md) 记日常与交接，**registry 记环境资产**。
 

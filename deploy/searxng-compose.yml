@@ -1,0 +1,24 @@
+# Self-hosted SearXNG — local free-search backend for the q CLI.
+# Usage: docker compose up -d  (then: q "test query" — the CLI auto-detects it)
+# Binds loopback only. Adjust the host port if 8080 is taken (and set Q_SEARXNG_URL accordingly).
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    restart: unless-stopped   # 想省资源可改为 "no"（按需 docker start）
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./searxng:/etc/searxng
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8080/
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - NET_BIND_SERVICE
+    logging:
+      driver: json-file
+      options:
+        max-size: "1m"
+        max-file: "1"
