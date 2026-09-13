@@ -13,5 +13,6 @@
 | `deploy/` + `tools/q/q.py` 的搜索后端 | [searxng/searxng](https://github.com/searxng/searxng)（AGPL-3.0） | 作为**独立后端服务引用**（未改其源码）；本仓仅提供部署样例（compose/settings）与调用协议 |
 | `rules/search-chain.md` 搜狗选择器与节流参数 | **Original**（批量实证沉淀：`div.vrwrap` 无验证码最优、≤4 批/75-120s 间隔、跨任务 ≥90s、双故障形态判别表） | — |
 | `rules/onboarding.md` + `snippets/AGENTS-onboarding.md` | 社区分享「我给所有 AI Agent 写了一份入职手册」（2026-09-13，未署名原帖） | 14 节提示词改写为协议体；去除 WorkBuddy 专属路径泛化为 `.<agent>/memory/`；修正全角句号笔误；与 registry / skills 协议交叉引用 |
+| `snippets/AGENTS-cot.md` | [NoWait: arXiv:2506.08343](https://arxiv.org/html/2506.08343v1)（EMNLP 2025 Findings）＋ apolo.us 推理 token 分析 ＋ [linshenkx/prompt-optimizer](https://github.com/linshenkx/prompt-optimizer) 评估模板的「禁令-失败模式绑定」措辞范式 | 方法论吸收（不复制 AGPL 模板文本）：每条禁令绑定一个具体失败模式；分推理层（部分有效，减负）与输出层（硬禁令）两档；Non-Goals 显式声明不禁真实回溯 |
 
 其余文件（模板 / 示例 / 片段）为上述规则的派生内容。引用均遵循上游各自许可证；本仓库整体以 [MIT](LICENSE) 发布。
