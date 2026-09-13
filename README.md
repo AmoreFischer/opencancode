@@ -19,7 +19,8 @@ opencancode/
 │   ├── journal-handoff.md   # daily journal + <100-line session handoff
 │   ├── registry.md          # environment registry: models/proxy/APIs/services/tools — look up before asking, register on change
 │   ├── search-chain.md      # free search chain: self-hosted backend -> free fallback -> STOP
-│   └── skills.md            # skill registry: frontmatter is the source, indexes are generated
+│   ├── skills.md            # skill registry: frontmatter is the source, indexes are generated
+│   └── onboarding.md        # agent onboarding protocol: discover workspace root, save stable rules, never hardcode paths
 ├── templates/
 │   ├── DEVLOG-entry.md      # fill-in entry template
 │   ├── HANDOFF.md           # fill-in handoff template
@@ -44,12 +45,13 @@ opencancode/
     ├── AGENTS-registry.md   # paste-ready rule block: environment registry lookup
     ├── AGENTS-rules.md      # paste-ready rule block: Top 10 iron rules
     ├── AGENTS-search.md     # paste-ready rule block: free search chain + STOP discipline
-    └── AGENTS-skills.md     # paste-ready rule block: skill manifest reconciliation
+    ├── AGENTS-skills.md     # paste-ready rule block: skill manifest reconciliation
+    └── AGENTS-onboarding.md # paste-ready rule block: first-time agent onboarding into a long-term workspace
 ```
 
 ## Adopt in 3 steps
 
-1. Paste the `snippets/` rule blocks you need into your agent's instruction file (`AGENTS.md`, `CLAUDE.md`, system prompt — whatever your agent reads): development logging (`AGENTS-log.md`), environment registry (`AGENTS-registry.md`), iron rules (`AGENTS-rules.md`), skill reconciliation (`AGENTS-skills.md`), free search chain (`AGENTS-search.md`).
+1. Paste the `snippets/` rule blocks you need into your agent's instruction file (`AGENTS.md`, `CLAUDE.md`, system prompt — whatever your agent reads): development logging (`AGENTS-log.md`), environment registry (`AGENTS-registry.md`), iron rules (`AGENTS-rules.md`), skill reconciliation (`AGENTS-skills.md`), free search chain (`AGENTS-search.md`), first-time onboarding (`AGENTS-onboarding.md`).
 2. Copy `templates/` into your workspace as starting points for `DEVLOG.md`, `journal/_handoff.md`, and your `registry/` tables.
 3. Follow `rules/`: every entry records what was done, decisions, pitfalls, artifacts — plus **who / where / which model / which baseline** via the execution metadata block.
 
@@ -65,7 +67,7 @@ opencancode/
 
 ## 中文简介
 
-面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表** + **工程铁律** + **技能管理** + **免费搜索链**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，`deploy/` 一把起自托管搜索后端、`tools/q/` 一行命令全平台调用，规则细节见 `rules/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；环境资产一次登记先查后问；铁律为 agent 提供行为约束层；技能索引生成不手抄；联网获取走免费链、全程盖章可审计，绝不静默降级付费/原生。
+面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表** + **工程铁律** + **技能管理** + **免费搜索链** + **Agent 入职协议**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，`deploy/` 一把起自托管搜索后端、`tools/q/` 一行命令全平台调用，规则细节见 `rules/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；环境资产一次登记先查后问；铁律为 agent 提供行为约束层；技能索引生成不手抄；联网获取走免费链、全程盖章可审计，绝不静默降级付费/原生。
 
 ## Sources & attribution
 
