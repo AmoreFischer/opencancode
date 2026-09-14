@@ -30,7 +30,8 @@ opencancode/
 │   ├── REGISTRY-services.md # fill-in local service registry template
 │   ├── REGISTRY-tools.md    # fill-in tool registry template
 │   ├── SKILL.md             # skill file template (frontmatter: name/description/version/triggers)
-│   └── SKILLS.json          # machine-readable skill manifest template (generated, never hand-edited)
+│   ├── SKILLS.json          # machine-readable skill manifest template (generated, never hand-edited)
+│   └── REPORT.html          # single-file report template: 3-pane (meta/content/toc) + draggable splitters + dark-first + theme toggle + back-to-top
 ├── examples/
 │   ├── devlog-example.md    # fictional project, 3 entries incl. cross-model & cross-runtime relay
 │   ├── registry-example.md  # fictional workspace with all five registry tables filled in
