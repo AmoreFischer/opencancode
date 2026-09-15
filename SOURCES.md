@@ -27,5 +27,6 @@
 | `skills/极简沟通/SKILL.md` 模式 A | [mattpocock/skills](https://github.com/mattpocock/skills)（其 /caveman 技能） | 压缩四规则（去冠词/填充/客套/犹豫；保留技术实质；`[THING][VERB][REASON]` 句式；安全例外）；本版增加 A-/B 分档与上下文自动触发 |
 | `skills/极简沟通/SKILL.md` 反伪压缩/永不省清单/模式 A-/Auto-Clarity | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)（**MIT**） | v2.6 规则文本吸收：中文适配（否定词/数字/助词永不省）、禁自造缩写与箭头、受众轴局部恢复；遵循 MIT 许可注明出处，版权归上游作者 |
 | `skills/整理/SKILL.md` L3.3 R1-R6 诊断链 | [hyhmrright/brooks-lint](https://github.com/hyhmrright/brooks-lint)（MIT） | 12 本经典书蒸馏的六维诊断（认知过载/变更传播/知识重复/偶发复杂度/依赖失序/领域模型扭曲）方法论吸收；出处编号对齐本仓 iron-rules |
+| `skills/deep-dive/SKILL.md` 检索哲学 | [VectifyAI/PageIndex](https://github.com/VectifyAI/PageIndex) | 无向量检索三原则（similarity≠relevance / 结构优先 / 推理选段）转化为深挖选文标准 |
 
 其余文件（模板 / 示例 / 片段）为上述规则的派生内容。引用均遵循上游各自许可证；本仓库整体以 [MIT](LICENSE) 发布。
