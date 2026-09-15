@@ -14,5 +14,10 @@
 | `rules/search-chain.md` 搜狗选择器与节流参数 | **Original**（批量实证沉淀：`div.vrwrap` 无验证码最优、≤4 批/75-120s 间隔、跨任务 ≥90s、双故障形态判别表） | — |
 | `rules/onboarding.md` + `snippets/AGENTS-onboarding.md` | 社区分享「我给所有 AI Agent 写了一份入职手册」（2026-09-13，未署名原帖） | 14 节提示词改写为协议体；去除 WorkBuddy 专属路径泛化为 `.<agent>/memory/`；修正全角句号笔误；与 registry / skills 协议交叉引用 |
 | `snippets/AGENTS-cot.md` | [NoWait: arXiv:2506.08343](https://arxiv.org/html/2506.08343v1)（EMNLP 2025 Findings）＋ apolo.us 推理 token 分析 ＋ [linshenkx/prompt-optimizer](https://github.com/linshenkx/prompt-optimizer) 评估模板的「禁令-失败模式绑定」措辞范式 | 方法论吸收（不复制 AGPL 模板文本）：每条禁令绑定一个具体失败模式；分推理层（部分有效，减负）与输出层（硬禁令）两档；Non-Goals 显式声明不禁真实回溯。第 0 条输入侧闸门（2026-09-15 增）为 **Original**——「澄清先于揣测」纪律的泛化（歧义短指令列候选请用户选，禁默认揣测），与推理层禁令构成先后两道闸门 |
+| `skills/提问智慧/SKILL.md` ESR 六律与追问框架 | [ESR: How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html)（中译 [ryanhanwu/How-To-Ask-Questions-The-Smart-Way](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)） | 六律从「论坛求助」转化为「AI 协作追问」框架；模式体系（诊断/自检/grilling/共享语言/小模型注入）为原创组合；共享语言示例表改用虚构项目 |
+| `skills/提问智慧/SKILL.md` 模式 D/E | [mattpocock/skills](https://github.com/mattpocock/skills) | `/grill-me` → Grilling Session（≤6 问结构化对齐）；`CONTEXT.md` → 共享语言注入，泛化为 agent 无关写法 |
+| `skills/brainstorming/SKILL.md` | [obra/superpowers](https://github.com/obra/superpowers)（其 brainstorming skill）＋ [github/spec-kit](https://github.com/github/spec-kit) | 设计先行 checklist 与 HARD-GATE 移植；`[NEEDS CLARIFICATION]` 自检来自 spec-kit；跨技能引用改为本仓技能链 |
+| `skills/writing-plans/SKILL.md` | [obra/superpowers](https://github.com/obra/superpowers)（其 writing-plans skill）＋ [github/spec-kit](https://github.com/github/spec-kit) | 2-5 分钟任务粒度与 TDD 循环保留；Pre-Implementation Gates 融合 spec-kit 门禁思想；计划模板 frontmatter 泛化 |
+| `skills/systematic-debugging/SKILL.md` | [obra/superpowers](https://github.com/obra/superpowers)（其 systematic-debugging skill）＋ [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | 4 阶段流程（复现→隔离→根因→验证）保留；ponytail「修共享函数不修调用者」规则并入阶段 4 修复原则 |
 
 其余文件（模板 / 示例 / 片段）为上述规则的派生内容。引用均遵循上游各自许可证；本仓库整体以 [MIT](LICENSE) 发布。

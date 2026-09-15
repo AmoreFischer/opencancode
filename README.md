@@ -21,6 +21,11 @@ opencancode/
 │   ├── search-chain.md      # free search chain: self-hosted backend -> free fallback -> STOP
 │   ├── skills.md            # skill registry: frontmatter is the source, indexes are generated
 │   └── onboarding.md        # agent onboarding protocol: discover workspace root, save stable rules, never hardcode paths
+├── skills/
+│   ├── 提问智慧/SKILL.md              # requirement refinement: ESR six rules -> precise clarification list, grilling session, shared language
+│   ├── brainstorming/SKILL.md         # design first: refine an idea into an approved design doc before any code
+│   ├── writing-plans/SKILL.md         # turn an approved design into a 2-5-min-step TDD implementation plan
+│   └── systematic-debugging/SKILL.md  # 4-stage debugging: reproduce -> isolate -> root cause -> fix & verify
 ├── templates/
 │   ├── DEVLOG-entry.md      # fill-in entry template
 │   ├── HANDOFF.md           # fill-in handoff template
@@ -54,7 +59,7 @@ opencancode/
 ## Adopt in 3 steps
 
 1. Paste the `snippets/` rule blocks you need into your agent's instruction file (`AGENTS.md`, `CLAUDE.md`, system prompt — whatever your agent reads): development logging (`AGENTS-log.md`), environment registry (`AGENTS-registry.md`), iron rules (`AGENTS-rules.md`), skill reconciliation (`AGENTS-skills.md`), free search chain (`AGENTS-search.md`), first-time onboarding (`AGENTS-onboarding.md`), chain-of-thought quality bans (`AGENTS-cot.md`).
-2. Copy `templates/` into your workspace as starting points for `DEVLOG.md`, `journal/_handoff.md`, and your `registry/` tables.
+2. Copy `templates/` into your workspace as starting points for `DEVLOG.md`, `journal/_handoff.md`, and your `registry/` tables. Copy any `skills/<id>/` directory you want into your agent's skills folder — one directory per skill, frontmatter (`name/description/version/triggers`) is the single source of truth (see `rules/skills.md`).
 3. Follow `rules/`: every entry records what was done, decisions, pitfalls, artifacts — plus **who / where / which model / which baseline** via the execution metadata block.
 
 ## Core ideas in one minute
@@ -65,11 +70,12 @@ opencancode/
 - **Registry: register once, look up everywhere** — which models you have (and how each agent calls them), which proxy ports serve what, which external APIs you depend on, which services run locally, and where your tools live — all in `registry/` tables (`models` / `proxy` / `apis` / `services` / `tools`). Agents look them up before asking you, and register changes as they happen — no more re-stating your setup in every conversation.
 - **Iron rules** — 28 engineering disciplines in five groups (process & principles, environment isolation, Git & credentials, service ops, debugging methodology) that override agent defaults; a Top-10 paste-ready snippet gets you started.
 - **Skill registry** — each skill's frontmatter is the single source of truth; manifests and trigger tables are **generated, never hand-copied**; sessions reconcile against the manifest at start, so stale skill lists surface themselves instead of silently misleading.
+- **Four process skills** — ready-to-adopt skills covering the request-to-code pipeline: clarify before guessing (提问智慧), design before code (brainstorming), plan before implementation (writing-plans), root cause before patch (systematic-debugging). Each is a self-contained `skills/<id>/SKILL.md` with explicit trigger words; they chain 提问智慧 → brainstorming → writing-plans → execution, with systematic-debugging for when things break.
 - **Search kit** — a self-hosted free search chain: the `q` CLI queries your own SearXNG backend (`deploy/` brings it up in one command), falls back to free news scraping, and **stops** when both fail — agents never silently degrade to paid or platform-native search; every result carries a cost stamp.
 
 ## 中文简介
 
-面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表** + **工程铁律** + **技能管理** + **免费搜索链** + **Agent 入职协议**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，`deploy/` 一把起自托管搜索后端、`tools/q/` 一行命令全平台调用，规则细节见 `rules/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；环境资产一次登记先查后问；铁律为 agent 提供行为约束层；技能索引生成不手抄；联网获取走免费链、全程盖章可审计，绝不静默降级付费/原生。
+面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表** + **工程铁律** + **技能管理** + **流程技能四件**（需求澄清 提问智慧 / 设计先行 brainstorming / 实施计划 writing-plans / 系统调试 systematic-debugging） + **免费搜索链** + **Agent 入职协议**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，`skills/` 目录整拷进你的技能目录，`deploy/` 一把起自托管搜索后端、`tools/q/` 一行命令全平台调用，规则细节见 `rules/`、流程技能见 `skills/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；环境资产一次登记先查后问；铁律为 agent 提供行为约束层；技能索引生成不手抄；联网获取走免费链、全程盖章可审计，绝不静默降级付费/原生。
 
 ## Sources & attribution
 
