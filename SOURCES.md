@@ -28,5 +28,7 @@
 | `skills/极简沟通/SKILL.md` 反伪压缩/永不省清单/模式 A-/Auto-Clarity | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)（**MIT**） | v2.6 规则文本吸收：中文适配（否定词/数字/助词永不省）、禁自造缩写与箭头、受众轴局部恢复；遵循 MIT 许可注明出处，版权归上游作者 |
 | `skills/整理/SKILL.md` L3.3 R1-R6 诊断链 | [hyhmrright/brooks-lint](https://github.com/hyhmrright/brooks-lint)（MIT） | 12 本经典书蒸馏的六维诊断（认知过载/变更传播/知识重复/偶发复杂度/依赖失序/领域模型扭曲）方法论吸收；出处编号对齐本仓 iron-rules |
 | `skills/deep-dive/SKILL.md` 检索哲学 | [VectifyAI/PageIndex](https://github.com/VectifyAI/PageIndex) | 无向量检索三原则（similarity≠relevance / 结构优先 / 推理选段）转化为深挖选文标准 |
+| `skills/需求管理/SKILL.md` | [obra/superpowers](https://github.com/obra/superpowers) | Spec First（追问意图/分块确认）与 Task→Review 自主推进循环思想；三区队列/顺位规则/状态前缀文档/归档流程为原创 |
+| `skills/负载控制/SKILL.md` | context-mode（名称照录）＋ larksuite/cli（名称照录）＋ [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | Think in Code 与量化口径（context-mode）、Agent-Native 三原则（larksuite/cli）、规划门「先清单再扇出」（oh-my-openagent）；水位决策树/归因/文件式派发协议/带预算细分为原创；由内部三技能合并泛化 |
 
 其余文件（模板 / 示例 / 片段）为上述规则的派生内容。引用均遵循上游各自许可证；本仓库整体以 [MIT](LICENSE) 发布。

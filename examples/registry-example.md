@@ -1,6 +1,6 @@
 # 注册表示例 — demo-app 工作区（虚构）
 
-> 展示 `registry/` 五张表填好后的样子。所有名称、端口均为虚构。规则见 [rules/registry.md](../rules/registry.md)。
+> 展示 `registry/` 六张表填好后的样子。所有名称、端口均为虚构。规则见 [rules/registry.md](../rules/registry.md)。
 
 ## registry/models.md
 
@@ -43,6 +43,27 @@
 | xlsx | tabular.py | `scripts/tabular.py <md> -o <xlsx>` | 给非技术读者的报告表格 | 活跃 | 2026-09-02 |
 | legacy-build | build.sh | `scripts/build.sh` | 旧版打包 | 停用（由 `pnpm build` 替代） | 2026-09-01 |
 
+## registry/absorption.md
+
+### 安装启用类
+
+| 仓库 | 吸收内容 | 应用节点 | 应用工作流 | 应用产物 | 关联 |
+|------|----------|----------|------------|----------|------|
+| `github.com/alphademo/ocr-kit` | 截图 OCR CLI | 本机（全部 agent） | 日报截图转文字 | `scripts/ocr_wrap.py` | ext-001 |
+
+### 内化吸收类
+
+| 仓库/来源 | 吸收内容 | 应用节点 | 应用工作流 | 应用产物 | 关联 |
+|-----------|----------|----------|------------|----------|------|
+| `github.com/alphademo/tidy-prompt`（MIT） | 「先确认再动手」规则文本（保留版权声明） | 全部 agent | agent 指令文件第 3 节 | `AGENTS.md` §3 + `[溯源: alphademo/tidy-prompt]` | — |
+| `github.com/betademo/rag-notes`（AGPL） | 只吸收「分层检索」方法论，不复制文本 | CLI agent | 知识库检索链 | `docs/retrieval.md` | — |
+
+### 拒绝 / 归档 / 暂缓类
+
+| 仓库 | 一句话去向 | 关联 |
+|------|-----------|------|
+| `github.com/gammalabs/super-mcp` | 已拒绝（内置搜索覆盖；防重复评估留档） | ext-003 |
+
 **本示例展示的要点**
 
 - 停用模型 `gamma` 保留行、注明替代者——决策可追溯。
@@ -51,3 +72,4 @@
 - API 表带计费形态（免费/按量/订阅/积分）——只看表即可做成本审计；`weather` 无需 key 也登记（一行说清「为什么不用配凭据」）。
 - `search-bridge` 标注「按需启动 + 就绪耗时」——agent 先 `docker start` 再探测，不误判故障。
 - tools 表以**角色**为句柄（`fmt`/`snap`/`xlsx`），文档与技能引用角色而非工具名——换工具只改一行。
+- absorption 表区分「装本体」与「只吸收思路」：MIT 文本吸收保留版权声明；AGPL 件只吸收方法论不复制文本；拒绝项留档防未来重复评估。

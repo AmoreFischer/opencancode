@@ -2,6 +2,8 @@
 
 > **One ordinary person's agent usage habits. Better suggestions welcome!**
 > 一名普通人的 agent 使用习惯。欢迎提供更好的建议！
+>
+> **v6 (2026-09-15)** — skill library complete: **14 ready-to-adopt skills** in `skills/` (process / knowledge & communication / governance & research / queue & load), plus the absorption registry (`templates/REGISTRY-absorption.md` + `rules/registry.md` §5).
 
 Open, agent-agnostic protocols for **development logging** — a DEVLOG execution-metadata convention plus a daily journal & session-handoff chain that any AI coding agent can adopt: CLI agents, IDE agents, autonomous harnesses, or a mix of them.
 
@@ -33,7 +35,9 @@ opencancode/
 │   ├── ext-manager/SKILL.md           # extension governance: register -> evaluate (4 questions) -> install -> enable -> review; never install unregistered
 │   ├── 内肃/SKILL.md                  # heavy system purge (3 tiers): full-code / whole-system / monthly audit; explicit user trigger only, backup first
 │   ├── deep-dive/SKILL.md             # six-dimension muckraking research on a company/industry/product; narrative output, not data tables
-│   └── kb-evolve/SKILL.md             # feedback-driven KB/QA evolution loop: 4-type diagnosis + attribution matrix + evolution-task ledger
+│   ├── kb-evolve/SKILL.md             # feedback-driven KB/QA evolution loop: 4-type diagnosis + attribution matrix + evolution-task ledger
+│   ├── 需求管理/SKILL.md              # requirement lifecycle: spec-first, 3-zone task queue with promotion rules, plan.md overview, archive flow
+│   └── 负载控制/SKILL.md              # context watermarks in absolute tokens: think-in-code, attribution, dispatch-by-file, budgeted splitting, handoff, de-scope
 ├── templates/
 │   ├── DEVLOG-entry.md      # fill-in entry template
 │   ├── HANDOFF.md           # fill-in handoff template
@@ -42,6 +46,7 @@ opencancode/
 │   ├── REGISTRY-proxy.md    # fill-in proxy & port registry template
 │   ├── REGISTRY-services.md # fill-in local service registry template
 │   ├── REGISTRY-tools.md    # fill-in tool registry template
+│   ├── REGISTRY-absorption.md # fill-in absorption map template: external repo -> what was taken -> where it's applied
 │   ├── SKILL.md             # skill file template (frontmatter: name/description/version/triggers)
 │   ├── SKILLS.json          # machine-readable skill manifest template (generated, never hand-edited)
 │   └── REPORT.html          # single-file report template: 3-pane (meta/content/toc) + draggable splitters + dark-first + theme toggle + back-to-top
@@ -75,15 +80,15 @@ opencancode/
 - **Execution metadata block** — every log entry opens with platform, session id, model (with thinking/reasoning level), mode, cost, and relay point. Future-you can audit any entry.
 - **Relay reconciliation** — when a different model or runtime continues the work, the entry must reference what it continues ("based on #12"), and reconcile before writing if the baseline moved. Think optimistic locking for logs.
 - **Handoff under 100 lines** — end every session with a compact structured handoff: goal / done / undone / context snapshot / next first step.
-- **Registry: register once, look up everywhere** — which models you have (and how each agent calls them), which proxy ports serve what, which external APIs you depend on, which services run locally, and where your tools live — all in `registry/` tables (`models` / `proxy` / `apis` / `services` / `tools`). Agents look them up before asking you, and register changes as they happen — no more re-stating your setup in every conversation.
+- **Registry: register once, look up everywhere** — which models you have (and how each agent calls them), which proxy ports serve what, which external APIs you depend on, which services run locally, and where your tools live — all in `registry/` tables (`models` / `proxy` / `apis` / `services` / `tools`), plus an absorption map (`absorption.md`) that answers "this external repo/idea — where did we apply it?". Agents look them up before asking you, and register changes as they happen — no more re-stating your setup in every conversation.
 - **Iron rules** — 28 engineering disciplines in five groups (process & principles, environment isolation, Git & credentials, service ops, debugging methodology) that override agent defaults; a Top-10 paste-ready snippet gets you started.
 - **Skill registry** — each skill's frontmatter is the single source of truth; manifests and trigger tables are **generated, never hand-copied**; sessions reconcile against the manifest at start, so stale skill lists surface themselves instead of silently misleading.
-- **Twelve ready-to-adopt skills** — three clusters covering the full working arc. Process: clarify before guessing (提问智慧), design before code (brainstorming), plan before implementation (writing-plans), root cause before patch (systematic-debugging). Knowledge & communication: four-mode research with a crystallization step (study), pitfall memory with create-only and recall-is-not-execute contracts (小本本), tiered token-economy output (极简沟通), session hygiene (整理). Governance & deep research: extension lifecycle gated on register-first (ext-manager), heavy three-tier system purge that only ever fires on explicit user request with backup-first (内肃), six-dimension muckraking narrative research (deep-dive), and a feedback-driven evolution loop for knowledge/QA services (kb-evolve). Each is a self-contained `skills/<id>/SKILL.md` with explicit trigger words; they cross-reference into a chain: 提问智慧 → brainstorming → writing-plans → execution, systematic-debugging when things break, 整理 to wrap up, 内肃 when it's purge season.
+- **Fourteen ready-to-adopt skills** — four clusters covering the full working arc. Process: clarify before guessing (提问智慧), design before code (brainstorming), plan before implementation (writing-plans), root cause before patch (systematic-debugging). Knowledge & communication: four-mode research with a crystallization step (study), pitfall memory with create-only and recall-is-not-execute contracts (小本本), tiered token-economy output (极简沟通), session hygiene (整理). Governance & deep research: extension lifecycle gated on register-first (ext-manager), heavy three-tier system purge that only ever fires on explicit user request with backup-first (内肃), six-dimension muckraking narrative research (deep-dive), and a feedback-driven evolution loop for knowledge/QA services (kb-evolve). Queue & load: a 3-zone requirement queue with plan.md as the cross-session context entry (需求管理), and context watermark management in absolute tokens — think-in-code, attribution, dispatch-by-file, budgeted splitting, handoff, de-scope (负载控制). Each is a self-contained `skills/<id>/SKILL.md` with explicit trigger words; they cross-reference into a chain: 提问智慧 → brainstorming → writing-plans → execution, systematic-debugging when things break, 整理 to wrap up, 内肃 when it's purge season.
 - **Search kit** — a self-hosted free search chain: the `q` CLI queries your own SearXNG backend (`deploy/` brings it up in one command), falls back to free news scraping, and **stops** when both fail — agents never silently degrade to paid or platform-native search; every result carries a cost stamp.
 
 ## 中文简介
 
-面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表** + **工程铁律** + **技能管理** + **技能库十二件**（流程：需求澄清 提问智慧 / 设计先行 brainstorming / 实施计划 writing-plans / 系统调试 systematic-debugging；知识与沟通：研究 study / 踩坑记忆 小本本 / 极简沟通 / 会话卫生 整理；治理与深挖：扩展管理 ext-manager / 重型清理 内肃 / 深挖 deep-dive / 知识库进化 kb-evolve） + **免费搜索链** + **Agent 入职协议**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，`skills/` 目录整拷进你的技能目录，`deploy/` 一把起自托管搜索后端、`tools/q/` 一行命令全平台调用，规则细节见 `rules/`、技能见 `skills/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；环境资产一次登记先查后问；铁律为 agent 提供行为约束层；技能索引生成不手抄；联网获取走免费链、全程盖章可审计，绝不静默降级付费/原生。
+面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表**（含吸收对照表） + **工程铁律** + **技能管理** + **技能库十四件**（流程：需求澄清 提问智慧 / 设计先行 brainstorming / 实施计划 writing-plans / 系统调试 systematic-debugging；知识与沟通：研究 study / 踩坑记忆 小本本 / 极简沟通 / 会话卫生 整理；治理与深挖：扩展管理 ext-manager / 重型清理 内肃 / 深挖 deep-dive / 知识库进化 kb-evolve；队列与负载：需求管理 需求管理 / 上下文水位 负载控制） + **免费搜索链** + **Agent 入职协议**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，`skills/` 目录整拷进你的技能目录，`deploy/` 一把起自托管搜索后端、`tools/q/` 一行命令全平台调用，规则细节见 `rules/`、技能见 `skills/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；环境资产一次登记先查后问；铁律为 agent 提供行为约束层；技能索引生成不手抄；联网获取走免费链、全程盖章可审计，绝不静默降级付费/原生。
 
 ## Sources & attribution
 
