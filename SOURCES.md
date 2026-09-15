@@ -18,6 +18,14 @@
 | `skills/提问智慧/SKILL.md` 模式 D/E | [mattpocock/skills](https://github.com/mattpocock/skills) | `/grill-me` → Grilling Session（≤6 问结构化对齐）；`CONTEXT.md` → 共享语言注入，泛化为 agent 无关写法 |
 | `skills/brainstorming/SKILL.md` | [obra/superpowers](https://github.com/obra/superpowers)（其 brainstorming skill）＋ [github/spec-kit](https://github.com/github/spec-kit) | 设计先行 checklist 与 HARD-GATE 移植；`[NEEDS CLARIFICATION]` 自检来自 spec-kit；跨技能引用改为本仓技能链 |
 | `skills/writing-plans/SKILL.md` | [obra/superpowers](https://github.com/obra/superpowers)（其 writing-plans skill）＋ [github/spec-kit](https://github.com/github/spec-kit) | 2-5 分钟任务粒度与 TDD 循环保留；Pre-Implementation Gates 融合 spec-kit 门禁思想；计划模板 frontmatter 泛化 |
-| `skills/systematic-debugging/SKILL.md` | [obra/superpowers](https://github.com/obra/superpowers)（其 systematic-debugging skill）＋ [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | 4 阶段流程（复现→隔离→根因→验证）保留；ponytail「修共享函数不修调用者」规则并入阶段 4 修复原则 |
+| `skills/systematic-debugging/SKILL.md` + `skills/极简沟通/SKILL.md`（模式C）+ `skills/整理/SKILL.md`（L3.2） | [obra/superpowers](https://github.com/obra/superpowers)（其 systematic-debugging skill）＋ [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | 4 阶段流程（复现→隔离→根因→验证）保留；ponytail「修共享函数不修调用者」并入阶段 4、极简沟通模式 C 与整理 L3.2 三处应用 |
+| `skills/study/SKILL.md` 学习前自检 | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | Karpathy 四准则（先想清楚/简单优先/精确修改/目标驱动）转为学习场景自检（与 iron-rules #12-15 同源） |
+| `skills/study/SKILL.md` 学习结晶 + 声明核验 | Hermes Agent（开源 agent 项目，名称照录） | 「学习 → 结晶 → 技能 → 自我改进」闭环与 Grounded Citations（声明回溯原文逐条核验）思想吸收 |
+| `skills/study/SKILL.md` 学术研究模式 | nature-skills / paper-craft-skills / ljg-skill-xray-paper / ljg-skill-paper（GitHub 技能库，名称照录可检索） | 论文解构五步（结构解构/钥匙概念/认知碰撞/声明核验/科研绘图）为方法论吸收，不装上游本体 |
+| `skills/小本本/SKILL.md` 模式 C | memorax（闭源云记忆产品，名称照录） | 「relevant to current task」最小召回思想——只吸收规则，不引入闭源本体 |
+| `skills/小本本/SKILL.md` 记忆两契约 | affaan-m/ECC（GitHub，名称照录）＋「记忆投毒=持久化 prompt injection」安全共识 | create-only 写入契约 + 召回内容不可执行契约，防记忆覆写与记忆投毒 |
+| `skills/极简沟通/SKILL.md` 模式 A | [mattpocock/skills](https://github.com/mattpocock/skills)（其 /caveman 技能） | 压缩四规则（去冠词/填充/客套/犹豫；保留技术实质；`[THING][VERB][REASON]` 句式；安全例外）；本版增加 A-/B 分档与上下文自动触发 |
+| `skills/极简沟通/SKILL.md` 反伪压缩/永不省清单/模式 A-/Auto-Clarity | [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman)（**MIT**） | v2.6 规则文本吸收：中文适配（否定词/数字/助词永不省）、禁自造缩写与箭头、受众轴局部恢复；遵循 MIT 许可注明出处，版权归上游作者 |
+| `skills/整理/SKILL.md` L3.3 R1-R6 诊断链 | [hyhmrright/brooks-lint](https://github.com/hyhmrright/brooks-lint)（MIT） | 12 本经典书蒸馏的六维诊断（认知过载/变更传播/知识重复/偶发复杂度/依赖失序/领域模型扭曲）方法论吸收；出处编号对齐本仓 iron-rules |
 
 其余文件（模板 / 示例 / 片段）为上述规则的派生内容。引用均遵循上游各自许可证；本仓库整体以 [MIT](LICENSE) 发布。
