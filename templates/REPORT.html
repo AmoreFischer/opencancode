@@ -1,167 +1,270 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-dark>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>报告模板 · Report Template</title>
+<title>报告标题（改我）</title>
 <!-- ============================================================
-  报告模板 v1.0（2026-09-15 规范化）
-  规格（铁律「报告输出规范」）：
-    ① 三栏布局：左=元信息/概览，中=正文（两侧拖条可调宽），右=导航目录
-    ② 右侧导航：TOC 自动生成 + 滚动高亮 + 点击跳转
-    ③ 默认暗色主题，右上角切换按钮（localStorage 记忆）
-    ④ 右下角回顶按钮（滚动出现）
+  报告模板 v1.1（2026-09-15 定稿，替代 v1.0；v1.0 备份见同目录）
+  规格（铁律「报告输出规范」v1.1）：
+    ① 响应式三态：≥1100 桌面（侧栏导航+正文）· 760-1100 两栏（侧栏入抽屉）
+      · <760 手机单栏文档流（100dvh / text-size-adjust / 表格代码块横滚 / 44px 回顶+安全区）
+    ② TOC 自动生成 + 滚动高亮 + 平滑跳转；≤1100 变高亮「☰ 目录」抽屉（四路关闭）
+    ③ 暗色默认（html[data-dark]）+ 右上角主题切换（localStorage 记忆）
+    ④ 右下角回顶按钮（滚动出现，手机 44px + 安全区）
     ⑤ 单文件零依赖（内嵌 CSS/JS，可离线打开）
-  [溯源: 可拖分栏交互参考通用 IDE/Web GUI 惯例；规范固化 2026-09-15]
-  用法：复制本文件 → 改 <title> 与左栏元信息 → 正文区写 <section>（h2/h3 自动进 TOC）
+    ⑥ 滚动条：主滚动区隐藏（位置感=顶部进度条+回顶，dsh 逻辑）；
+       侧栏/代码块/表格 8px 圆角细条（dsh 原生样式）
+    ⑦ dsh 动画/交互语言 [溯源: dsh-client-ui-chat]：
+       section 入场 opacity+translateX(4px)（IntersectionObserver+跳读兜底）·
+       滚动容器上下 mask 24px 渐隐 · 100/200/300ms + cubic-bezier(.4,0,.2,1) ·
+       prefers-reduced-motion 降级
+    ⑧ 阅读范式：连续文档全展开（综合试样B 定稿）；
+       移动端元信息=「ℹ️ 报告信息」折叠条（原生 details）
+  设计 token：dsh WebUI bluish 灰阶 + deepseek 蓝 [溯源: dsh-client-ui-theme]
+  用法：复制本文件 → 改 <title> 与 header h1 → 侧栏「报告信息」→ 正文 <section>
+    （h2/h3 自动进 TOC；章节入场动画自动生效；表格自动包横滚层）
+  长章节可选折叠：给 section 加 data-fold 属性 + 首 <p class="preview"> 摘要，
+    JS 会自动构建折叠头（预览 clamp 两行，点击平滑展开）——本模板默认全展开
 ============================================================ -->
 <style>
   :root{
-    --bg:#0f1117; --bg-panel:#161a23; --bg-card:#1c212d; --border:#2a3040;
-    --text:#d7dce6; --text-dim:#8b93a5; --accent:#5b9dff; --accent-soft:rgba(91,157,255,.12);
-    --ok:#4ade80; --warn:#facc15; --bad:#f87171; --dragbar:#2a3040;
+    --bg:#f9fafb; --l1:#ffffff; --l2:#f1f3f5;
+    --t1:#0f1115; --t2:#61666b; --t3:#81858c;
+    --bd:rgba(0,0,0,.06); --bd2:rgba(0,0,0,.10);
+    --code:#f9fafb;
+    --brand:#4176e6; --brand-soft:rgba(65,118,230,.10);
+    --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+    --shadow-panel:0 0 0 .5px var(--bd),0 3px 8px rgba(0,0,0,.03),0 0 16px rgba(0,0,0,.02);
+    --ease:cubic-bezier(.4,0,.2,1);
   }
-  [data-theme="light"]{
-    --bg:#f5f6f8; --bg-panel:#ffffff; --bg-card:#eef0f4; --border:#d5d9e2;
-    --text:#24292f; --text-dim:#5a6272; --accent:#0b62d6; --accent-soft:rgba(11,98,214,.08);
-    --ok:#15803d; --warn:#a16207; --bad:#b91c1c; --dragbar:#c9cedb;
+  html[data-dark]{
+    --bg:#151517; --l1:#232324; --l2:#2c2c2e;
+    --t1:#f9fafb; --t2:#cfd3d6; --t3:#adb2b8;
+    --bd:rgba(255,255,255,.06); --bd2:rgba(255,255,255,.12);
+    --code:#1b1b1c;
+    --brand:#5686fe; --brand-soft:rgba(86,134,254,.14);
+    --ok:#4ed17e; --warn:#f7ad31; --bad:#f87171;
+    --shadow-panel:0 0 0 .5px var(--bd2),0 3px 8px rgba(0,0,0,.25);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font:15px/1.75 "Segoe UI","Microsoft YaHei",sans-serif;height:100vh;overflow:hidden;display:flex;flex-direction:column}
-  /* ── 顶栏 ── */
-  header{display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--bg-panel);border-bottom:1px solid var(--border);flex-shrink:0}
-  header h1{font-size:16px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  #themeToggle{background:var(--bg-card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:5px 12px;cursor:pointer;font-size:13px}
-  #themeToggle:hover{border-color:var(--accent)}
-  /* ── 三栏 ── */
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{background:var(--bg);color:var(--t1);font:14.5px/1.85 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",sans-serif;height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column}
+  code,pre{font-family:"SF Mono","JetBrains Mono","Fira Code",Consolas,Menlo,monospace}
+  /* ⑥ 滚动条：主区隐藏，局部 8px 圆角细条 */
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-thumb{background:var(--t3);border-radius:4px}
+  ::-webkit-scrollbar-track{background:transparent}
+  #side,#doc,#doc pre,.tw{scrollbar-width:none}
+  #side::-webkit-scrollbar,#doc::-webkit-scrollbar,#doc pre::-webkit-scrollbar,.tw::-webkit-scrollbar{display:none}
+
+  header{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--l1);border-bottom:.5px solid var(--bd2);flex-shrink:0;position:relative;z-index:50}
+  header h1{font-size:14px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .btn{background:transparent;border:1px solid var(--bd2);color:var(--t2);border-radius:10px;padding:6px 12px;cursor:pointer;font-size:13px;transition:background .1s var(--ease),color .1s var(--ease);font-family:inherit}
+  .btn:hover{background:var(--l2);color:var(--t1)}
+  #tocBtn{display:none;align-items:center;gap:6px;background:var(--brand-soft);border:1px solid var(--brand);color:var(--brand);font-weight:600;flex-shrink:0}
+  #progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--brand);transition:width .12s linear;pointer-events:none}
+
   main{display:flex;flex:1;min-height:0}
-  #leftPanel{width:240px;min-width:160px;max-width:420px;overflow-y:auto;background:var(--bg-panel);border-right:1px solid var(--border);padding:16px;flex-shrink:0}
-  #centerPanel{flex:1;min-width:280px;overflow-y:auto;padding:28px 40px;scroll-behavior:smooth}
-  #rightPanel{width:230px;min-width:150px;max-width:380px;overflow-y:auto;background:var(--bg-panel);border-left:1px solid var(--border);padding:14px;flex-shrink:0}
-  .dragbar{width:5px;cursor:col-resize;background:var(--dragbar);flex-shrink:0;transition:background .15s}
-  .dragbar:hover,.dragbar.active{background:var(--accent)}
-  /* ── 左栏 ── */
-  .meta-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13px}
-  .meta-card .k{color:var(--text-dim);font-size:12px}
-  .meta-card .v{font-weight:600;margin-bottom:8px}
-  /* ── 正文 ── */
-  #centerPanel section{margin-bottom:38px}
-  #centerPanel h2{font-size:20px;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:16px;scroll-margin-top:20px}
-  #centerPanel h3{font-size:16px;margin:20px 0 10px;color:var(--accent);scroll-margin-top:20px}
-  #centerPanel p{margin-bottom:10px}
-  #centerPanel code{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:13px}
-  #centerPanel pre{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:12px;overflow-x:auto;margin-bottom:12px}
-  #centerPanel pre code{background:none;border:none;padding:0}
-  #centerPanel table{border-collapse:collapse;width:100%;margin-bottom:12px;font-size:13.5px}
-  #centerPanel th,#centerPanel td{border:1px solid var(--border);padding:7px 10px;text-align:left}
-  #centerPanel th{background:var(--bg-card)}
-  #centerPanel blockquote{border-left:3px solid var(--accent);background:var(--accent-soft);padding:8px 14px;border-radius:0 8px 8px 0;margin-bottom:12px;color:var(--text-dim)}
+  #side{width:264px;flex-shrink:0;background:var(--l1);border-right:.5px solid var(--bd2);overflow-y:auto;display:flex;flex-direction:column}
+  .side-cap{font-size:12px;color:var(--t3);padding:14px 12px 6px;letter-spacing:.5px}
+  #toc a{display:block;color:var(--t2);text-decoration:none;font-size:13px;line-height:20px;padding:6px 12px;border-radius:8px;margin:0 6px 1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:background .1s var(--ease)}
+  #toc a:hover{background:var(--l2);color:var(--t1)}
+  #toc a.lvl3{padding-left:26px;font-size:12.5px;color:var(--t3)}
+  #toc a.active{background:var(--l2);color:var(--brand);font-weight:600}
+
+  /* ⑦ 主区：mask 上下渐隐 + 隐藏滚动条 */
+  #doc{
+    flex:1;min-width:0;overflow-y:auto;overscroll-behavior:contain;
+    -webkit-mask-image:linear-gradient(#0000 0,#000 24px calc(100% - 24px),#0000 100%);
+    mask-image:linear-gradient(#0000 0,#000 24px calc(100% - 24px),#0000 100%);
+  }
+  .col{max-width:860px;margin:0 auto;padding:26px 44px 90px}
+  /* ⑦ 章节入场动画 */
+  #doc section{margin-bottom:46px;opacity:0;transform:translateX(4px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+  #doc section.in{opacity:1;transform:none}
+
+  #doc h2{font-size:19px;line-height:28px;font-weight:700;padding-bottom:10px;border-bottom:.5px solid var(--bd2);margin-bottom:16px;scroll-margin-top:20px}
+  #doc h2 .no{color:var(--brand);margin-right:8px;font-size:15px}
+  #doc h3{font-size:15.5px;line-height:24px;font-weight:600;margin:18px 0 8px;scroll-margin-top:20px}
+  #doc h3::before{content:"";display:inline-block;width:3px;height:13px;background:var(--brand);border-radius:2px;margin-right:8px;vertical-align:-2px}
+  #doc p{margin-bottom:10px}
+  #doc b{font-weight:600}
+  #doc code{background:var(--l2);border-radius:5px;padding:1.5px 6px;font-size:13px}
+  #doc pre{background:var(--code);border:.5px solid var(--bd);border-radius:10px;padding:13px 15px;overflow-x:auto;margin-bottom:10px;font-size:13px;line-height:1.6}
+  #doc pre code{background:none;padding:0}
+  .tw{overflow-x:auto;margin-bottom:10px;-webkit-overflow-scrolling:touch}
+  #doc table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.6}
+  #doc th,#doc td{border-bottom:.5px solid var(--bd2);padding:8px 12px;text-align:left;vertical-align:top}
+  #doc th{background:var(--l2);font-weight:600;color:var(--t2);font-size:12.5px}
+  #doc tr:hover td{background:var(--l2)}
+  #doc blockquote{border-left:3px solid var(--brand);background:var(--brand-soft);padding:9px 15px;border-radius:6px 12px 12px 6px;margin-bottom:10px;color:var(--t2)}
+  #doc ul{padding-left:22px;margin-bottom:10px}
+  #doc li{margin-bottom:4px}
   .ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
-  /* ── 右栏 TOC ── */
-  #tocTitle{font-size:12px;color:var(--text-dim);letter-spacing:2px;margin-bottom:10px}
-  #toc a{display:block;color:var(--text-dim);text-decoration:none;font-size:13px;padding:5px 10px;border-left:2px solid transparent;border-radius:0 6px 6px 0;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  #toc a:hover{color:var(--text);background:var(--bg-card)}
-  #toc a.lvl2{font-weight:600}
-  #toc a.lvl3{padding-left:22px;font-size:12.5px}
-  #toc a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft)}
-  /* ── 回顶 ── */
-  #backTop{position:fixed;right:26px;bottom:26px;width:40px;height:40px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);color:var(--text);font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s;z-index:99}
+
+  #backTop{position:fixed;right:24px;bottom:24px;width:40px;height:40px;border-radius:12px;background:var(--l1);box-shadow:var(--shadow-panel);border:none;color:var(--t2);font-size:17px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:60}
   #backTop.show{opacity:1;pointer-events:auto}
-  #backTop:hover{border-color:var(--accent);color:var(--accent)}
-  /* ── 响应式 ── */
-  @media (max-width:900px){#leftPanel,#leftPanel+.dragbar{display:none}#rightPanel{width:170px}}
-  @media (max-width:600px){#rightPanel,#rightPanel+.dragbar{display:none}}
+  #backTop:hover{color:var(--brand)}
+  #tocBackdrop{display:none}
+  .m-meta{display:none}
+
+  /* ① 断点 */
+  @media (max-width:1100px){
+    #side{display:none}
+    #tocBtn{display:inline-flex}
+  }
+  @media (max-width:760px){
+    body{height:auto;overflow:visible;display:block}
+    header{position:sticky;top:0}
+    main{display:block}
+    #doc{overflow:visible}
+    .col{padding:16px 14px 70px}
+    #doc h2{font-size:18px;scroll-margin-top:60px}
+    #doc h3{scroll-margin-top:60px}
+    #side{display:flex;position:fixed;top:0;left:0;bottom:0;width:min(80vw,300px);transform:translateX(-105%);transition:transform .25s var(--ease);z-index:70;box-shadow:10px 0 30px rgba(0,0,0,.30);border-right:none}
+    body.toc-open #side{transform:translateX(0)}
+    #tocBackdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s var(--ease);z-index:65}
+    body.toc-open #tocBackdrop{opacity:1;pointer-events:auto}
+    #backTop{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:44px;height:44px}
+    /* ⑧ 移动端元信息：折叠 ℹ️ 条（桌面此块隐藏，元信息在侧栏） */
+    .m-meta{display:block;background:var(--l1);border:.5px solid var(--bd2);border-radius:12px;box-shadow:var(--shadow-panel);padding:13px 16px;margin-bottom:16px;font-size:13px}
+    .m-meta summary{cursor:pointer;list-style:none;user-select:none;display:flex;align-items:center;justify-content:space-between;color:var(--t1);font-weight:600;font-size:13.5px}
+    .m-meta summary::-webkit-details-marker{display:none}
+    .m-meta summary .chev{color:var(--t3);font-size:11px;transition:transform .2s var(--ease)}
+    .m-meta[open] summary .chev{transform:rotate(90deg)}
+    .m-meta .meta-body{margin-top:6px;border-top:.5px solid var(--bd)}
+    .m-meta .meta-row{padding:9px 0;border-bottom:.5px solid var(--bd)}
+    .m-meta .meta-row:last-child{border-bottom:none}
+    .m-meta .meta-row .k{font-size:12px;color:var(--t3);margin-bottom:2px}
+    .m-meta .meta-row .v{font-size:12.5px;color:var(--t2);line-height:1.7}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    #doc section{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
 
 <header>
+  <button id="tocBtn" class="btn">☰ 目录</button>
   <h1>📄 报告标题（改我）</h1>
-  <button id="themeToggle" title="切换主题">🌙 / ☀️</button>
+  <button id="themeToggle" class="btn">🌙 / ☀️</button>
+  <i id="progress"></i>
 </header>
 
 <main>
-  <!-- 左栏：报告元信息（改我） -->
-  <aside id="leftPanel">
-    <div class="meta-card">
-      <div class="k">日期</div><div class="v">2026-09-15</div>
-      <div class="k">执行</div><div class="v">&lt;平台&gt; · &lt;模型（推理档位）&gt;</div>
-      <div class="k">对象</div><div class="v">（写审了什么/做了什么）</div>
-      <div class="k">状态</div><div class="v"><span class="ok">✅ 通过</span> / <span class="warn">🟡 建议修</span> / <span class="bad">🔴 必须修</span></div>
-    </div>
-    <div class="meta-card">
-      <div class="k">一句话结论</div>
-      <div class="v" style="font-weight:400">（报告 TLDR 放这里，读报告的人 10 秒拿到结论）</div>
-    </div>
-  </aside>
-
-  <div class="dragbar" data-target="leftPanel"></div>
-
-  <!-- 中栏：正文（section 的 h2/h3 自动进 TOC） -->
-  <div id="centerPanel">
-    <section>
-      <h2>一、示例章节</h2>
-      <p>正文段落。支持 <code>行内代码</code>、<span class="ok">状态色</span>、表格与代码块：</p>
-      <blockquote>引用块用于重要声明或结论前置。</blockquote>
-      <pre><code># 代码块示例
-command --here</code></pre>
-      <h3>1.1 小节</h3>
-      <p>小节标题自动进入右侧导航第三级。</p>
-    </section>
-    <section>
-      <h2>二、第二个章节</h2>
-      <p>删掉示例，按报告实际结构组织。</p>
-    </section>
-  </div>
-
-  <div class="dragbar" data-target="rightPanel"></div>
-
-  <!-- 右栏：导航（自动生成） -->
-  <aside id="rightPanel">
-    <div id="tocTitle">导航 · CONTENTS</div>
+  <!-- 侧栏：报告导航 + 报告信息（改我） -->
+  <aside id="side">
+    <div class="side-cap">报告导航</div>
     <nav id="toc"></nav>
+    <div class="side-cap" style="border-top:.5px solid var(--bd2);margin-top:8px">报告信息</div>
+    <div style="padding:4px 18px 16px;font-size:12px;color:var(--t3);line-height:1.7">
+      日期 · 执行平台/模型 · 搜索链/花费<br>状态：<span class="ok">✅ 完成</span>
+    </div>
   </aside>
+
+  <div id="doc">
+    <div class="col">
+
+      <!-- 移动端折叠元信息（改我；桌面隐藏） -->
+      <details class="m-meta">
+        <summary><span>ℹ️ 报告信息</span><span class="chev">▶</span></summary>
+        <div class="meta-body">
+          <div class="meta-row"><div class="k">日期</div><div class="v">YYYY-MM-DD</div></div>
+          <div class="meta-row"><div class="k">执行</div><div class="v">平台 · 模型</div></div>
+          <div class="meta-row"><div class="k">对象</div><div class="v">报告对象/范围</div></div>
+          <div class="meta-row"><div class="k">状态</div><div class="v"><span class="ok">✅ 完成</span></div></div>
+        </div>
+      </details>
+
+      <!-- 正文：section 的 h2/h3 自动进 TOC；表格自动包横滚层（改我） -->
+      <section>
+        <h2><span class="no">〇</span>TL;DR 速览</h2>
+        <p>报告最核心结论放这里，读的人 10 秒拿到。</p>
+        <div class="tw"><table>
+          <tr><th>项</th><th>结论</th></tr>
+          <tr><td>示例行</td><td><span class="ok">状态色</span> / <span class="warn">警示色</span> / <span class="bad">风险色</span></td></tr>
+        </table></div>
+      </section>
+
+      <section>
+        <h2><span class="no">一</span>示例章节（删我，按实际结构组织）</h2>
+        <p>正文段落。支持 <code>行内代码</code>、<b>加粗</b>、引用块：</p>
+        <blockquote>重要声明或局限说明放引用块。</blockquote>
+        <h3>1.1 小节（自动进 TOC 三级）</h3>
+        <pre><code>代码块示例（自动横滚）
+command --here</code></pre>
+      </section>
+
+    </div>
+  </div>
 </main>
 
+<div id="tocBackdrop"></div>
 <button id="backTop" title="回到顶部">↑</button>
 
 <script>
 (function(){
   /* 主题切换（localStorage 记忆，默认暗色） */
   var root=document.documentElement,btn=document.getElementById('themeToggle');
-  var saved=localStorage.getItem('report-theme'); if(saved)root.setAttribute('data-theme',saved);
+  try{if(localStorage.getItem('report-theme')==='light')root.removeAttribute('data-dark');
+      else root.setAttribute('data-dark','');}catch(e){root.setAttribute('data-dark','')}
   btn.onclick=function(){
-    var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
-    root.setAttribute('data-theme',next); localStorage.setItem('report-theme',next);
+    var dark=root.hasAttribute('data-dark');
+    if(dark)root.removeAttribute('data-dark');else root.setAttribute('data-dark','');
+    try{localStorage.setItem('report-theme',dark?'light':'dark');}catch(e){}
   };
+  /* 表格自动包横滚层 */
+  document.querySelectorAll('#doc table').forEach(function(t){
+    var w=document.createElement('div');w.className='tw';
+    t.parentNode.insertBefore(w,t);w.appendChild(t);});
   /* TOC 自动生成 */
-  var toc=document.getElementById('toc'),centers=document.querySelectorAll('#centerPanel h2,#centerPanel h3');
+  var toc=document.getElementById('toc'),centers=document.querySelectorAll('#doc h2,#doc h3');
   centers.forEach(function(h,i){h.id=h.id||('sec-'+i);
     var a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;
-    a.className=h.tagName==='H2'?'lvl2':'lvl3';a.setAttribute('data-for',h.id);toc.appendChild(a);});
-  /* 滚动高亮（scrollspy）+ 回顶按钮显隐 */
-  var cp=document.getElementById('centerPanel'),back=document.getElementById('backTop'),links=toc.querySelectorAll('a');
-  cp.addEventListener('scroll',function(){
-    back.classList.toggle('show',cp.scrollTop>300);
-    var cur=null;centers.forEach(function(h){if(h.offsetTop-80<=cp.scrollTop)cur=h.id;});
+    a.className=h.tagName==='H2'?'lvl2':'lvl3';a.setAttribute('data-for',h.id);
+    a.addEventListener('click',function(ev){ev.preventDefault();
+      var t=document.getElementById(h.id);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+      document.body.classList.remove('toc-open');});
+    toc.appendChild(a);});
+  /* scrollspy + 回顶 + 进度条（双模式：桌面=doc 滚动，≤1100=整页滚动） */
+  var mq=window.matchMedia('(max-width:1100px)');
+  var doc=document.getElementById('doc'),back=document.getElementById('backTop'),links=toc.querySelectorAll('a');
+  var prog=document.getElementById('progress');
+  function rootEl(){return mq.matches?document.scrollingElement:doc;}
+  function onScroll(){
+    var el=rootEl(),max=el.scrollHeight-el.clientHeight;
+    prog.style.width=(max>0?(el.scrollTop/max*100):0)+'%';
+    back.classList.toggle('show',el.scrollTop>300);
+    var cur=null;centers.forEach(function(h){if(h.getBoundingClientRect().top<120)cur=h.id;});
     links.forEach(function(a){a.classList.toggle('active',a.getAttribute('data-for')===cur);});
+  }
+  doc.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('scroll',onScroll,{passive:true});
+  back.onclick=function(){rootEl().scrollTo({top:0,behavior:'smooth'});};
+  /* section 入场动画（dsh-turn-enter 同款）+ 跳读兜底 */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.06,rootMargin:'0px 0px -5% 0px'});
+  var secs=[].slice.call(document.querySelectorAll('#doc section'));
+  secs.forEach(function(el){io.observe(el);});
+  var vh=function(){return window.innerHeight||document.documentElement.clientHeight;};
+  secs.forEach(function(el){if(el.getBoundingClientRect().top<vh())el.classList.add('in');});
+  window.addEventListener('scroll',function(){
+    secs.forEach(function(el){
+      if(!el.classList.contains('in')&&el.getBoundingClientRect().top<vh()){
+        el.style.transition='none';el.classList.add('in');
+      }
+    });
   },{passive:true});
-  back.onclick=function(){cp.scrollTo({top:0,behavior:'smooth'});};
-  /* 拖条：调整相邻栏宽（触屏兼容） */
-  document.querySelectorAll('.dragbar').forEach(function(bar){
-    var side=bar.getAttribute('data-target'),panel=document.getElementById(side), startX=0, startW=0;
-    function down(x){bar.classList.add('active');startX=x;startW=panel.offsetWidth;
-      document.addEventListener('mousemove',move);document.addEventListener('mouseup',up);
-      document.addEventListener('touchmove',tmove);document.addEventListener('touchend',up);}
-    function move(e){var d=(side==='rightPanel'?startX-e.clientX:e.clientX-startX);
-      panel.style.width=Math.min(Math.max(startW+d,150),side==='rightPanel'?380:420)+'px';}
-    function tmove(e){move(e);e.preventDefault();}
-    function up(){bar.classList.remove('active');
-      document.removeEventListener('mousemove',move);document.removeEventListener('mouseup',up);
-      document.removeEventListener('touchmove',tmove);document.removeEventListener('touchend',up);}
-    bar.addEventListener('mousedown',function(e){down(e.clientX);e.preventDefault();});
-    bar.addEventListener('touchstart',function(e){down(e.touches[0].clientX);},{passive:false});
-  });
+  /* 抽屉（≤1100） */
+  var tocBtn=document.getElementById('tocBtn'),bd=document.getElementById('tocBackdrop');
+  function closeToc(){document.body.classList.remove('toc-open');}
+  tocBtn.onclick=function(){document.body.classList.toggle('toc-open');};
+  bd.onclick=closeToc;
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeToc();});
 })();
 </script>
 </body>
