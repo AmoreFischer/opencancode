@@ -90,6 +90,8 @@ opencancode/
 
 面向 AI 编程 agent 的开放式开发日志协议：**DEVLOG 执行元信息** + **journal / 会话交接** + **环境注册表**（含吸收对照表） + **工程铁律** + **技能管理** + **技能库十四件**（流程：需求澄清 提问智慧 / 设计先行 brainstorming / 实施计划 writing-plans / 系统调试 systematic-debugging；知识与沟通：研究 study / 踩坑记忆 小本本 / 极简沟通 / 会话卫生 整理；治理与深挖：扩展管理 ext-manager / 重型清理 内肃 / 深挖 deep-dive / 知识库进化 kb-evolve；队列与负载：需求管理 需求管理 / 上下文水位 负载控制） + **免费搜索链** + **Agent 入职协议**。任何 agent（CLI / IDE / 自治 harness，或混用）都可采用：把 `snippets/` 里的规则片段粘进你的 agent 指令文件，用 `templates/` 起步，`skills/` 目录整拷进你的技能目录，`deploy/` 一把起自托管搜索后端、`tools/q/` 一行命令全平台调用，规则细节见 `rules/`、技能见 `skills/`。核心主张：每条日志都能回答「谁、在哪个平台、用哪个模型、基于哪条基线写的」；环境资产一次登记先查后问；铁律为 agent 提供行为约束层；技能索引生成不手抄；联网获取走免费链、全程盖章可审计，绝不静默降级付费/原生。
 
+> 📖 **使用指引**（新）：怎么用、为什么这么设计、用起来会看到什么——安装三步、14 件技能速查表（触发词/作用/动机/预期行为）、完整工作弧线 → [`docs/GUIDE.md`](docs/GUIDE.md)（中文先行，英文版随试行后出）
+
 ## Sources & attribution
 
 See [SOURCES.md](SOURCES.md). The metadata protocol is original; the handoff structure is adapted from [mattpocock/skills](https://github.com/mattpocock/skills); the relay-reconciliation rule is inspired by [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent).
