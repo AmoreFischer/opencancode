@@ -140,7 +140,7 @@
 
 | 协议 | 管什么 | 对应 snippet | 建议粘到 |
 |---|---|---|---|
-| [`rules/iron-rules.md`](../rules/iron-rules.md) | 19 条工程铁律（完整版） | [`AGENTS-rules.md`](../snippets/AGENTS-rules.md)（Top 10 精简版） | 所有 agent 指令文件 |
+| [`rules/iron-rules.md`](../rules/iron-rules.md) | 29 条工程铁律（完整版） | [`AGENTS-rules.md`](../snippets/AGENTS-rules.md)（Top 10 精简版） | 所有 agent 指令文件 |
 | [`rules/devlog.md`](../rules/devlog.md) | 开发日志协议：执行元信息块 + 接力对账 | [`AGENTS-log.md`](../snippets/AGENTS-log.md) | 长期运行、多会话的 agent |
 | [`rules/journal-handoff.md`](../rules/journal-handoff.md) | 会话交接文档结构（<100 行） | —（结构即模板，用 [`templates/`](../templates/) 起步） | 跨会话接力场景 |
 | [`rules/onboarding.md`](../rules/onboarding.md) | Agent 入职协议：进新工作区先做什么 | [`AGENTS-onboarding.md`](../snippets/AGENTS-onboarding.md) | 每个新 agent 的首次会话 |
@@ -160,6 +160,9 @@
 
 **Q：换 agent 平台，习惯怎么带走？**
 链条平台无关。新平台重新走一遍安装三步（粘 snippets、拷 skills、复制 templates），你的日志与台账（DEVLOG/journal/registry）在工作区里，不在平台里——它们跟着你的代码仓库走。
+
+**Q：模型/接口迭代快，agent 某天连不上怎么办？**
+可以给运行时配一层静默自愈：定时或开机时探测在用模型端点的连通性（探测失败不静默直连，代理环境先探代理），正常时零输出；端点死亡才冒泡告警，附同家族替代端点与切换步骤（改配置前先备份）；全部云端端点失效时以本地小模型兜底执行修复。告警经未读文件注入下次会话，由你拍板处置。本仓不提供实现——测什么、多久测一次、换代默认策略（默认不动还是自动切换）取决于你的模型组合，留给具体用户自行设计。
 
 **Q：某条规则为什么这么定？上游是谁？**
 查 [SOURCES.md](../SOURCES.md)：吸收条目标注来源仓库与改动点，原创条目标 Original。
