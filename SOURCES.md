@@ -10,6 +10,7 @@
 | `rules/iron-rules.md` #12-15、#18 部分原则 | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills)（Karpathy CLAUDE.md 规则集） | 编号化为铁律并合并改写；补强「暴露权衡」维度；去除个人化表述 |
 | `rules/iron-rules.md` #17-18 标记法与测试门禁 | [github/spec-kit](https://github.com/github/spec-kit) | Test-First 门禁与 `[NEEDS CLARIFICATION]` 标记法，适配 agent 工作模式 |
 | `rules/iron-rules.md` #19 环境隔离 | Python 官方 venv 指南 + claude-code best practices | 泛化为跨语言的环境隔离要求 |
+| `rules/iron-rules.md` #2 授权语义、#3 证据分级、#18 冲突降级、#27 失败处置、#29 汇报完整性（v1.1 增补） | 外部 Codex 平台全局协作规范（用户分享文本，2026-09，非公开仓库） | 五个语义点泛化改写：去平台私有表述（「用户拍板」→「已批准范围」等），按 occ 既有条目主题就近并入 + 新增 #29 单列；与内部版铁律 #1/#16/#20/#21/#26 同源（对账见内部 crosswalk） |
 | `deploy/` + `tools/q/q.py` 的搜索后端 | [searxng/searxng](https://github.com/searxng/searxng)（AGPL-3.0） | 作为**独立后端服务引用**（未改其源码）；本仓仅提供部署样例（compose/settings）与调用协议 |
 | `rules/search-chain.md` 搜狗选择器与节流参数 | **Original**（批量实证沉淀：`div.vrwrap` 无验证码最优、≤4 批/75-120s 间隔、跨任务 ≥90s、双故障形态判别表） | — |
 | `rules/onboarding.md` + `snippets/AGENTS-onboarding.md` | 社区分享「我给所有 AI Agent 写了一份入职手册」（2026-09-13，未署名原帖） | 14 节提示词改写为协议体；去除 WorkBuddy 专属路径泛化为 `.<agent>/memory/`；修正全角句号笔误；与 registry / skills 协议交叉引用 |

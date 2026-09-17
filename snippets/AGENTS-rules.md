@@ -1,6 +1,6 @@
 # 工程铁律 Top 10 片段（OpenCanCode）
 
-> **用法**：整段粘贴进任意 agent 的指令文件（`AGENTS.md` / `CLAUDE.md` / system prompt）。完整 28 条见 [rules/iron-rules.md](../rules/iron-rules.md)。
+> **用法**：整段粘贴进任意 agent 的指令文件（`AGENTS.md` / `CLAUDE.md` / system prompt）。完整 29 条见 [rules/iron-rules.md](../rules/iron-rules.md)。
 
 ## 工程铁律（精选）
 
@@ -15,4 +15,4 @@
 9. **先搜后造**：实现新功能 / 排查疑难前先搜上游（issue / 官方文档）借鉴现有方案，采纳则标注来源。
 10. **链路要活**：单点深钻 2-3 轮无进展即换路径（换工具 / 渠道 / 验证手段），组合「最小复现 + 对照实验 + 日志取证」推进。
 
-> 完整版（28 条：流程原则 / 环境隔离 / Git 凭据 / 服务运维 / 排查方法论）见 `rules/iron-rules.md`。
+> 完整版（29 条：流程原则 / 环境隔离 / Git 凭据 / 服务运维 / 排查方法论 / 汇报纪律）见 `rules/iron-rules.md`。
