@@ -1,2 +1,4 @@
 # Local-only workspace timeline (never published)
 /journal/
+# Local SearXNG settings contain a generated secret_key (never published)
+/deploy/searxng/

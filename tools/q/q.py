@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # q — universal free-search CLI: searxng -> sogou-news fallback -> STOP (never silently degrade to paid/native).
 # Single source for all runtimes that can run a shell. Configure via env:
-#   Q_SEARXNG_URL       default http://127.0.0.1:8888
+#   Q_SEARXNG_URL       default http://127.0.0.1:8080
 #   Q_SEARXNG_CONTAINER default searxng   (set empty to disable docker auto-start)
 #   Q_LANG              default zh-CN
 # Usage:
