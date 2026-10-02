@@ -7,6 +7,7 @@
 用户要求部署/安装/迁移任何运行时之前，先完成以下检测并**汇报结果，然后停下等用户指令**——用户明确指定平台并确认后才开始动手：
 
 1. **基础层**：OS / shell / 包管理器（node/npm、python venv、docker、git）的存在性与版本；
+   - **PowerShell 版本形态**（Windows，经典坑）：agent/自动化场景必须用 PowerShell 7.x 的 **MSI 版**——直接从 [GitHub releases](https://github.com/PowerShell/PowerShell/releases) 拉取 `.msi` 安装；winget 的 msstore 源（模糊包名 `powershell` 就可能解析到它）装出的是 **MSIX 版**，运行在 AppContainer 沙箱中，文件系统/进程访问受限，**不利于 LLM agent 驱动**。检测到 MSIX 版时向用户报告并建议换 MSI 版；
 2. **数据层**：目标运行时的数据目录现状——已存在配置 = 有迁移面（先想备份与并存），全新 = 干净安装；
 3. **模型层**（重点，缺任何一项都不算检测完成）：
    - API key 存在性：只验存在与非空，**禁止回显值**；
@@ -36,3 +37,4 @@
 - **备份放进被改目录里**——升级/迁移后可能被新进程读写甚至污染；
 - **删掉旧入口图干净**——回滚通道随之消失，观察期前不清理；
 - **静默降级**——代理不通就直连、免费通道失效就切付费，都不允许，先停车报告。
+- **在 Windows 上给 agent 配 MSIX 版 PowerShell**——AppContainer 沙箱限制 agent 的文件/进程操作；从 GitHub releases 拉 MSI 版，别图方便用 winget/msstore 的 MSIX。
