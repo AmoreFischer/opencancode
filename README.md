@@ -5,6 +5,8 @@
 >
 > **v6 (2026-09-15)** — skill library complete: **14 ready-to-adopt skills** in `skills/` (process / knowledge & communication / governance & research / queue & load), plus the absorption registry (`templates/REGISTRY-absorption.md` + `rules/registry.md` §5).
 
+> **⚠️ 环境前提（Windows 用户必读，2026-10-02）**：agent/自动化场景的 PowerShell 一律用 7.x 的 **MSI 版**——从 [PowerShell GitHub Releases](https://github.com/PowerShell/PowerShell/releases) 直接下载 `.msi` 安装。**不要用 winget/msstore（或 Microsoft Store）装出的 MSIX 版**：它运行在 AppContainer 沙箱中，文件系统与进程操作受限，会让 LLM agent 驱动频频受阻。注意包名陷阱：模糊名 `winget install powershell` 就可能解析到 msstore 源装出 MSIX。部署相关检测纪律见 [`snippets/AGENTS-deploy.md`](snippets/AGENTS-deploy.md)。
+
 Open, agent-agnostic protocols for **development logging** — a DEVLOG execution-metadata convention plus a daily journal & session-handoff chain that any AI coding agent can adopt: CLI agents, IDE agents, autonomous harnesses, or a mix of them.
 
 ## Why
