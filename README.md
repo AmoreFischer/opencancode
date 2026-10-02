@@ -67,12 +67,13 @@ opencancode/
     ├── AGENTS-search.md     # paste-ready rule block: free search chain + STOP discipline
     ├── AGENTS-skills.md     # paste-ready rule block: skill manifest reconciliation
     ├── AGENTS-onboarding.md # paste-ready rule block: first-time agent onboarding into a long-term workspace
-    └── AGENTS-cot.md        # paste-ready rule block: chain-of-thought quality bans (reasoning + final output)
+    ├── AGENTS-cot.md        # paste-ready rule block: chain-of-thought quality bans (reasoning + final output)
+    └── AGENTS-deploy.md     # paste-ready rule block: deployment gate — detect (incl. model layer) -> report -> await instruction -> evidence chain
 ```
 
 ## Adopt in 3 steps
 
-1. Paste the `snippets/` rule blocks you need into your agent's instruction file (`AGENTS.md`, `CLAUDE.md`, system prompt — whatever your agent reads): development logging (`AGENTS-log.md`), environment registry (`AGENTS-registry.md`), iron rules (`AGENTS-rules.md`), skill reconciliation (`AGENTS-skills.md`), free search chain (`AGENTS-search.md`), first-time onboarding (`AGENTS-onboarding.md`), chain-of-thought quality bans (`AGENTS-cot.md`).
+1. Paste the `snippets/` rule blocks you need into your agent's instruction file (`AGENTS.md`, `CLAUDE.md`, system prompt — whatever your agent reads): development logging (`AGENTS-log.md`), environment registry (`AGENTS-registry.md`), iron rules (`AGENTS-rules.md`), skill reconciliation (`AGENTS-skills.md`), free search chain (`AGENTS-search.md`), first-time onboarding (`AGENTS-onboarding.md`), chain-of-thought quality bans (`AGENTS-cot.md`), deployment gates (`AGENTS-deploy.md`).
 2. Copy `templates/` into your workspace as starting points for `DEVLOG.md`, `journal/_handoff.md`, and your `registry/` tables. Copy any `skills/<id>/` directory you want into your agent's skills folder — one directory per skill, frontmatter (`name/description/version/triggers`) is the single source of truth (see `rules/skills.md`).
 3. Follow `rules/`: every entry records what was done, decisions, pitfalls, artifacts — plus **who / where / which model / which baseline** via the execution metadata block.
 

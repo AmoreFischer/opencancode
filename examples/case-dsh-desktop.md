@@ -3,6 +3,8 @@
 > 一个真实迁移的完整复盘：如何在不丢配置的前提下，把跑在 `npx` 固定版本上的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）迁移到官方桌面应用，并把「自动更新」驯服成可控流程。
 > 适用读者：任何在用 dsh（或同类带本地数据目录、会自动更新的 agent 运行时）的人。
 > 写法说明：路径已泛化（`~` = 用户主目录，`<DSH_HOME>` = 数据目录，默认 `~/.dsh`）；时间 2026-10，版本以当时为准。
+>
+> 🤖 **给 agent**：替用户执行本案例类部署前，先遵守 [`snippets/AGENTS-deploy.md`](../snippets/AGENTS-deploy.md)（环境检测含模型层 → 汇报 → 等用户指令 → 再动手）。
 
 ## TL;DR — 迁移清单
 
@@ -118,5 +120,6 @@ powershell "Get-ItemProperty 'HKCU:\...\Uninstall\*' | ? DisplayName -like '*Dee
 
 ## 相关
 
+- 部署纪律的可粘贴形态：[`snippets/AGENTS-deploy.md`](../snippets/AGENTS-deploy.md)（检测 → 汇报 → 等指令 → 证据链 → 三态汇报）
 - 上游产品：[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)（桌面版源码在 `apps/desktop`，其 README 对端口、共享 profile、CLI 注册、托盘行为有权威描述）
 - 本仓 `rules/registry.md`：迁移前后的环境登记（模型从哪个 provider 走、CLI 在哪、端口谁占）正是 registry 表要记的内容
