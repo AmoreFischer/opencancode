@@ -51,6 +51,7 @@ opencancode/
 │   ├── SKILLS.json          # machine-readable skill manifest template (generated, never hand-edited)
 │   └── REPORT.html          # single-file report template: 3-pane (meta/content/toc) + draggable splitters + dark-first + theme toggle + back-to-top
 ├── examples/
+│   ├── case-dsh-desktop.md  # real-world case study: migrating an agent harness (dsh) from pinned CLI to the official desktop app — backup, hash-baseline verification, the clean-template profile pitfall, update gates, rollback
 │   ├── devlog-example.md    # fictional project, 3 entries incl. cross-model & cross-runtime relay
 │   ├── registry-example.md  # fictional workspace with all five registry tables filled in
 │   └── skills-manifest-example.md  # frontmatter → manifest → trigger table, plus a rebuild after change
