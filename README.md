@@ -3,6 +3,8 @@
 > **One ordinary person's agent usage habits. Better suggestions welcome!**
 > 一名普通人的 agent 使用习惯。欢迎提供更好的建议！
 >
+> **v7 (2026-10-06)** — context-economics rules: **context-pack** (dispatch prompt protocol: 7-section task card, L0-L2 tiered injection, task-topology splitting criteria, ≤1.5k distilled return) and **review-layering** (layered review: L0 index → L1 evidence → L2 deep read, no layer-skipping, token anchor); onboarding v1.1 adds §15 multi-runtime rule distribution (single source of truth → generated injection surfaces).
+>
 > **v6 (2026-09-15)** — skill library complete: **14 ready-to-adopt skills** in `skills/` (process / knowledge & communication / governance & research / queue & load), plus the absorption registry (`templates/REGISTRY-absorption.md` + `rules/registry.md` §5).
 
 > **⚠️ 环境前提（Windows 用户必读，2026-10-02）**：agent/自动化场景的 PowerShell 一律用 7.x 的 **MSI 版**——从 [PowerShell GitHub Releases](https://github.com/PowerShell/PowerShell/releases) 直接下载 `.msi` 安装。**不要用 winget/msstore（或 Microsoft Store）装出的 MSIX 版**：它运行在 AppContainer 沙箱中，文件系统与进程操作受限，会让 LLM agent 驱动频频受阻。注意包名陷阱：模糊名 `winget install powershell` 就可能解析到 msstore 源装出 MSIX。部署相关检测纪律见 [`snippets/AGENTS-deploy.md`](snippets/AGENTS-deploy.md)。
@@ -24,7 +26,9 @@ opencancode/
 │   ├── registry.md          # environment registry: models/proxy/APIs/services/tools — look up before asking, register on change
 │   ├── search-chain.md      # free search chain: self-hosted backend -> free fallback -> STOP
 │   ├── skills.md            # skill registry: frontmatter is the source, indexes are generated
-│   └── onboarding.md        # agent onboarding protocol: discover workspace root, save stable rules, never hardcode paths
+│   ├── context-pack.md      # dispatch prompt protocol: 7-section task card, L0-L2 tiered injection, task-topology split criteria, ≤1.5k distilled return
+│   ├── review-layering.md   # layered review: L0 index -> L1 evidence -> L2 deep read; no layer-skipping, token anchor, evidence grading
+│   └── onboarding.md        # agent onboarding protocol: discover workspace root, save stable rules, never hardcode paths (+ §15 multi-runtime rule distribution)
 ├── skills/
 │   ├── 提问智慧/SKILL.md              # requirement refinement: ESR six rules -> precise clarification list, grilling session, shared language
 │   ├── brainstorming/SKILL.md         # design first: refine an idea into an approved design doc before any code
