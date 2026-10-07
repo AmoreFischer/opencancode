@@ -78,7 +78,7 @@ git diff --stat && git diff --name-only && git ls-files --others --exclude-stand
 
 ### L2.5 写日志
 
-journal 当日文件追加收工段；跨模块改动追加对应 DEVLOG。
+journal 当日文件追加收工段；跨模块改动追加对应 DEVLOG。写 `_handoff.md` 交接段时按 [journal-handoff 协议](../../rules/journal-handoff.md) v1.1 五问结构（目标+授权 / 待办 / 待人决策 / 证据 / 继续条件）。
 
 ### L2.6 更新 CHANGELOG
 

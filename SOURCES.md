@@ -31,5 +31,7 @@
 | `skills/deep-dive/SKILL.md` 检索哲学 | [VectifyAI/PageIndex](https://github.com/VectifyAI/PageIndex) | 无向量检索三原则（similarity≠relevance / 结构优先 / 推理选段）转化为深挖选文标准 |
 | `skills/需求管理/SKILL.md` | [obra/superpowers](https://github.com/obra/superpowers) | Spec First（追问意图/分块确认）与 Task→Review 自主推进循环思想；三区队列/顺位规则/状态前缀文档/归档流程为原创 |
 | `skills/负载控制/SKILL.md` | context-mode（名称照录）＋ larksuite/cli（名称照录）＋ [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | Think in Code 与量化口径（context-mode）、Agent-Native 三原则（larksuite/cli）、规划门「先清单再扇出」（oh-my-openagent）；水位决策树/归因/文件式派发协议/带预算细分为原创；由内部三技能合并泛化 |
+| `skills/小本本/SKILL.md` 模式 D（reflect 关联查询）+ 模式 B 时间窗（v3.2 增） | [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | 方法论吸收（不装其 Docker+PG 本体）：`reflect` 操作 → 「对主题已知什么」跨条目聚合三分输出（已知/未知/冲突）；`recall` 的 temporal 路 → 检索时间窗过滤（两代日期格式兼容 + Git Bash MSYS 管道坑实证注释）；分数类 benchmark 争议不作吸收依据 |
+| `rules/journal-handoff.md` v1.1 五问结构 + 开工侧恢复顺序 | [loopx-project/loopx](https://github.com/loopx-project/loopx)（Apache-2.0） | 方法论吸收（不装多 agent 控制面本体）：五问模型 → 交接模板补「待用户决策」（human judgment）与「继续条件」（continuation：预算水位/停止线/恢复入口）两节 + 「已完成」证据分级标注；恢复仪式 → 「交接消费」四步（读授权→核证据→查水位→按首步启动）；预算水位泛化为"有监控链路才查"，不带任何机器专属路径 |
 
 其余文件（模板 / 示例 / 片段）为上述规则的派生内容。引用均遵循上游各自许可证；本仓库整体以 [MIT](LICENSE) 发布。
