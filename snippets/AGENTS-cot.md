@@ -36,4 +36,17 @@
 - 不承诺压制推理 token 成本——提示词层对推理 token 生成量的控制是概率性的；API 直连场景可用 token 级压制（NoWait，arXiv:2506.08343：压制 "Wait/Alternatively/Hmm/Let me reconsider" 省约 27-51% 思维链且精度基本不掉）；
 - 双语任务（翻译/对照）中语言混杂禁令让位于任务本身。
 
-> [溯源: NoWait arXiv:2506.08343（EMNLP 2025 Findings）＋ apolo.us 推理 token 分析 ＋ linshenkx/prompt-optimizer 评估模板的禁令-失败模式绑定范式，2026-09-14 ＋ 2026-09-16 增补 10-13 条：blader/humanizer §2/§3/§5/§22、petergyang/no-ai-slop（Interpretive metadiscourse / Faux-insight setups），对照两仓模式清单并集 ＋ 2026-10-06 增补第 14 条：内肃 N3 xlsx 列错位两次走偏实证（用户拍板）]
+## 配套机制：CoT 审计行（可选，闭环用）
+
+禁令不止于粘贴——用一行审计日志闭环。每个工作会话收尾时，在你的工作日志该会话段落末尾内联记一行：
+
+```
+CoT|<运行时>|<模型>|失败模式编号×次数（无观察记 0；表外模式一句话）|纠偏N（当场实测抓出即修的次数）|回溯±N（正回溯=携新证据，负=纯重复）|成/返工
+```
+
+- 只记有观察的会话，无观察不硬凑；表外失败模式（工具误判、归因走偏、编辑覆盖等）照记一句话——审计线捕获的不止编号违例，月度汇总时表外高频族反哺规则或踩坑库
+- 回溯字段是第 2 条禁令的可观测化：每次回溯标注是否携带新信息
+- 月度（或累积 ≥20 行）汇总一次：各编号违例计数、成/返工比、表外高频族识别；编号违例近零 = 禁令集稳定无需扩条
+- 实证口径（首个汇总周期约两个月、68 会话段）：编号违例近零、输出层零——与「输出层属指令遵循范畴」的判断一致；token 节省为概率性收益不承诺（见 Non-Goals）
+
+> [溯源: NoWait arXiv:2506.08343（EMNLP 2025 Findings）＋ apolo.us 推理 token 分析 ＋ linshenkx/prompt-optimizer 评估模板的禁令-失败模式绑定范式，2026-09-14 ＋ 2026-09-16 增补 10-13 条：blader/humanizer §2/§3/§5/§22、petergyang/no-ai-slop（Interpretive metadiscourse / Faux-insight setups），对照两仓模式清单并集 ＋ 2026-10-06 增补第 14 条：内肃 N3 xlsx 列错位两次走偏实证（用户拍板）＋ 2026-11-06 增补配套审计行机制：CanCode 审计线实践两月（68 行首期汇总实证背书）后公开切片，**Original**]

@@ -73,7 +73,7 @@ opencancode/
     ├── AGENTS-search.md     # paste-ready rule block: free search chain + STOP discipline
     ├── AGENTS-skills.md     # paste-ready rule block: skill manifest reconciliation
     ├── AGENTS-onboarding.md # paste-ready rule block: first-time agent onboarding into a long-term workspace
-    ├── AGENTS-cot.md        # paste-ready rule block: chain-of-thought quality bans (reasoning + final output)
+    ├── AGENTS-cot.md        # paste-ready rule block: chain-of-thought quality bans (reasoning + final output) + one-line self-audit log
     └── AGENTS-deploy.md     # paste-ready rule block: deployment gate — detect (incl. model layer) -> report -> await instruction -> evidence chain
 ```
 
