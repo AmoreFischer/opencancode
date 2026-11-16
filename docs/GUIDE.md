@@ -17,7 +17,7 @@
 
 **一句话工作弧线**：你提需求 → 提问智慧把需求问清 → brainstorming 出设计 → writing-plans 拆成小步 → 执行（出 bug 走 systematic-debugging，踩坑记小本本）→ 整理·收工落日志 → 季度内肃大扫除。完整叙事见[第三章](#三一条完整工作弧线会发生什么)。
 
-**14 件技能速查表**——「为什么」列的溯源详见 [SOURCES.md](../SOURCES.md)：
+**15 件技能速查表**——「为什么」列的溯源详见 [SOURCES.md](../SOURCES.md)：
 
 ### 流程四件（需求 → 设计 → 计划 → 调试）
 
@@ -46,12 +46,13 @@
 | [deep-dive](../skills/deep-dive/SKILL.md) | 深挖 / 扒皮 / 背后故事 | 公司/行业/现象的多维深挖 | 表层数据人人可见，事实链才是价值 | 多专题产出叙事性深挖报告，非市场分析 |
 | [kb-evolve](../skills/kb-evolve/SKILL.md) | 知识库进化 / 优化知识库 | 知识库反馈驱动进化 | 知识库不是建完就完，负面反馈是最好的进化燃料 | 反馈诊断四类（关键词/误分类/回复质量/知识缺失）→ 优化 → 进化台账 |
 
-### 队列与负载两件（跨会话编排）
+### 队列负载与编排三件（跨会话 / 无人值守）
 
 | 技能 | 精选触发词 | 作用 | 为什么这么做 | 会发生什么 |
 |---|---|---|---|---|
 | [需求管理](../skills/需求管理/SKILL.md) | 待开发 / 新需求 / 需求清单 | 需求全生命周期队列 | 会话会断，队列不能断；plan.md 是跨会话的上下文入口 | 三区队列（排队/进行中/完成）+ 顺位规则 + 状态前缀文档 + 归档流程 |
 | [负载控制](../skills/负载控制/SKILL.md) | 水位 / 快爆了 / 拆任务 | 上下文水位管理 | 长任务临限是常态，与其被动截断不如主动卸载 | 绝对 token 判据 + 决策树 → 四手段（文件式派发/预算细分/落盘换会话/降级缩减）→ 归因记录 |
+| [总监模式](../skills/总监模式/SKILL.md) | 总监 / 开线 / 派单 | 单角色多对话的工作线调度 | 长线任务无人值守时，单对话硬跑会把上下文滚到 10⁸ token 量级；重活烧子代理、状态住文件才可续 | 三件套（协议/台帐/指令箱）+ 授权表（observe→active）+ 任务板 + 闸门（配额/占用/容量）+ 派单模板；对话可换壳接力，子代理 spawn/fork 语义双平台实证 |
 
 ---
 
@@ -136,7 +137,7 @@
 
 ## 四、规则与片段指引
 
-七份协议各管一段，snippet 是它们的可粘贴形态：
+十一份协议各管一段，snippet 是它们的可粘贴形态：
 
 | 协议 | 管什么 | 对应 snippet | 建议粘到 |
 |---|---|---|---|
@@ -147,6 +148,10 @@
 | [`rules/registry.md`](../rules/registry.md) | 环境注册表：扩展/吸收对照的登记协议 | [`AGENTS-registry.md`](../snippets/AGENTS-registry.md) | 管扩展、管依赖的 agent |
 | [`rules/search-chain.md`](../rules/search-chain.md) | 免费搜索链：通道选择与节流参数 | [`AGENTS-search.md`](../snippets/AGENTS-search.md) | 需要联网检索的 agent |
 | [`rules/skills.md`](../rules/skills.md) | 技能管理：frontmatter 约定与对账 | [`AGENTS-skills.md`](../snippets/AGENTS-skills.md) | 维护技能库的 agent |
+| [`rules/context-pack.md`](../rules/context-pack.md) | 派单提示协议：7 段任务卡 + L0-L2 分层注入 + ≤1.5k 蒸馏回报 | — | 派子代理/多 agent 协作的 agent |
+| [`rules/review-layering.md`](../rules/review-layering.md) | 分层评审：L0 索引 → L1 证据 → L2 深读，不跳层 | — | 长报告/代码评审场景 |
+| [`rules/freshness-gate.md`](../rules/freshness-gate.md) | 知识时效闸：三 gap 判「查不查」+ 三要素答案戳 + 评估集 | [`AGENTS-freshness.md`](../snippets/AGENTS-freshness.md) | 一切会写版本号/断言新框架的 agent |
+| [`rules/hypothesis-ledger.md`](../rules/hypothesis-ledger.md) | 假设台账：预算制换线（时间片/计数触发/换线分级/五态）+ ADR 三重门控 | —（台账行格式即模板，配 [AGENTS-log.md](../snippets/AGENTS-log.md) 用） | 长排障/疑难任务、无人值守线 |
 
 ---
 
